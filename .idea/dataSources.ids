@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - employees@localhost" uuid="4fe04313-ae8f-4d41-b869-b2c2f9b10203">
+    <database-info product="MySQL" version="5.7.21" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="employees"/>
+    <table name="current_dept_emp" schema="" catalog="employees" type="VIEW">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dept_no" sqlType="CHAR" precision="4" scale="0" nullable="false" jdbcType="1"/>
+      <column name="from_date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="to_date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+    </table>
+    <table name="departments" schema="" catalog="employees" type="TABLE">
+      <column name="dept_no" sqlType="CHAR" precision="4" scale="0" nullable="false" jdbcType="1"/>
+      <column name="dept_name" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="dept_no"/>
+      <exported-key name="dept_emp_ibfk_2" table="dept_emp" schema="" catalog="employees" columns="dept_no"/>
+      <exported-key name="dept_manager_ibfk_2" table="dept_manager" schema="" catalog="employees" columns="dept_no"/>
+      <index name="dept_name" unique="true" columns="dept_name"/>
+    </table>
+    <table name="dept_emp" schema="" catalog="employees" type="TABLE">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dept_no" sqlType="CHAR" precision="4" scale="0" nullable="false" jdbcType="1"/>
+      <column name="from_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="to_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="emp_no,dept_no"/>
+      <foreign-key name="dept_emp_ibfk_1" columns="emp_no" ref-table="employees" ref-schema="" ref-catalog="employees" ref-columns="emp_no" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="dept_emp_ibfk_2" columns="dept_no" ref-table="departments" ref-schema="" ref-catalog="employees" ref-columns="dept_no" update-rule="3" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="dept_emp_latest_date" schema="" catalog="employees" type="VIEW">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="from_date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="to_date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+    </table>
+    <table name="dept_manager" schema="" catalog="employees" type="TABLE">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dept_no" sqlType="CHAR" precision="4" scale="0" nullable="false" jdbcType="1"/>
+      <column name="from_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="to_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="emp_no,dept_no"/>
+      <foreign-key name="dept_manager_ibfk_1" columns="emp_no" ref-table="employees" ref-schema="" ref-catalog="employees" ref-columns="emp_no" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="dept_manager_ibfk_2" columns="dept_no" ref-table="departments" ref-schema="" ref-catalog="employees" ref-columns="dept_no" update-rule="3" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="employees" schema="" catalog="employees" type="TABLE">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="birth_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="first_name" sqlType="VARCHAR" precision="14" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="gender" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1"/>
+      <column name="hire_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="emp_no"/>
+      <exported-key name="dept_emp_ibfk_1" table="dept_emp" schema="" catalog="employees" columns="emp_no"/>
+      <exported-key name="dept_manager_ibfk_1" table="dept_manager" schema="" catalog="employees" columns="emp_no"/>
+      <exported-key name="salaries_ibfk_1" table="salaries" schema="" catalog="employees" columns="emp_no"/>
+      <exported-key name="titles_ibfk_1" table="titles" schema="" catalog="employees" columns="emp_no"/>
+    </table>
+    <table name="salaries" schema="" catalog="employees" type="TABLE">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="salary" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="from_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="to_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="emp_no,from_date"/>
+      <foreign-key name="salaries_ibfk_1" columns="emp_no" ref-table="employees" ref-schema="" ref-catalog="employees" ref-columns="emp_no" update-rule="3" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="titles" schema="" catalog="employees" type="TABLE">
+      <column name="emp_no" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="from_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="to_date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="emp_no,title,from_date"/>
+      <foreign-key name="titles_ibfk_1" columns="emp_no" ref-table="employees" ref-schema="" ref-catalog="employees" ref-columns="emp_no" update-rule="3" delete-rule="0" deferrability="2"/>
+    </table>
+  </data-source>
+</component>
